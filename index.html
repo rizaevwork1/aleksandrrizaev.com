@@ -88,11 +88,12 @@
   /* HERO */
   .hero {
     min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 120px 40px 60px;
-    gap: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    text-align: center;
+    padding: 90px 40px 40px;
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
@@ -118,25 +119,28 @@
 
   .hero-title {
     font-family: 'Unbounded', sans-serif;
-    font-size: clamp(36px, 5vw, 64px);
+    font-size: clamp(28px, 3.5vw, 52px);
     font-weight: 900;
-    line-height: 1.0;
+    line-height: 1.05;
     letter-spacing: -0.02em;
-    margin-bottom: 28px;
+    margin-bottom: 20px;
+    max-width: 700px;
+    text-align: center;
     opacity: 0;
     animation: fadeUp 0.7s 0.2s forwards;
   }
 
   .hero-title .accent { color: var(--accent); }
-  .hero-title .line2 { color: var(--muted); font-weight: 300; }
+  .hero-title .line2 { color: var(--muted); font-weight: 300; font-size: 0.6em; line-height: 1.3; display: block; margin-top: 8px; }
 
   .hero-sub {
     font-size: 16px;
     font-weight: 400;
     color: #999;
-    max-width: 460px;
+    max-width: 520px;
     margin-bottom: 44px;
     line-height: 1.7;
+    text-align: center;
     opacity: 0;
     animation: fadeUp 0.7s 0.35s forwards;
   }
@@ -145,6 +149,7 @@
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
+    justify-content: center;
     opacity: 0;
     animation: fadeUp 0.7s 0.5s forwards;
   }
@@ -450,12 +455,109 @@
     text-transform: uppercase;
     color: #ccc;
     transition: all 0.2s;
+    position: relative;
+    cursor: default;
   }
 
   .stack-item:hover {
     border-color: var(--accent);
     color: var(--accent);
     background: rgba(200, 245, 66, 0.04);
+  }
+
+  .stack-tooltip {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(26, 26, 26, 0.85);
+    border: 1px solid rgba(200, 245, 66, 0.35);
+    color: rgba(240, 240, 240, 0.7);
+    font-family: 'Mulish', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
+    padding: 10px 14px;
+    white-space: normal;
+    width: 200px;
+    z-index: 10;
+    line-height: 1.5;
+    pointer-events: none;
+    text-align: center;
+    backdrop-filter: blur(4px);
+  }
+
+  .stack-tooltip::after {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-bottom-color: rgba(200, 245, 66, 0.35);
+  }
+
+  .stack-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: var(--accent);
+  }
+
+  .stack-item:hover .stack-tooltip {
+    display: block;
+  }
+
+  /* MARQUEE */
+  .marquee-wrapper {
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 0;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 48px;
+    width: max-content;
+    animation: marquee 30s linear infinite;
+  }
+
+  .marquee-track:hover { animation-play-state: paused; }
+
+  .marquee-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Unbounded', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #666;
+    white-space: nowrap;
+    transition: color 0.2s;
+  }
+
+  .marquee-item:hover { color: var(--accent); }
+
+  .marquee-item img { 
+    filter: brightness(0) invert(1);
+    opacity: 0.4; 
+    transition: opacity 0.2s; 
+  }
+  .marquee-item:hover img { opacity: 0.9; }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
   }
 
   /* ABOUT */
@@ -618,10 +720,12 @@
 
     .hero {
       grid-template-columns: 1fr;
-      padding: 90px 24px 40px;
+      padding: 80px 24px 32px;
       gap: 0;
       min-height: auto;
       width: 100%;
+      text-align: center;
+      align-items: center;
     }
 
     .hero-right { display: none; }
@@ -629,26 +733,30 @@
     .hero-tag {
       font-size: 9px;
       margin-bottom: 20px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       max-width: 100%;
-      white-space: normal;
     }
 
     .hero-title {
-      font-size: 28px;
+      font-size: 26px;
       word-break: break-word;
       overflow-wrap: break-word;
+      margin-bottom: 12px;
     }
 
     .hero-sub {
       font-size: 14px;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
       max-width: 100%;
     }
 
     .hero-actions {
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
       width: 100%;
+      align-items: center;
     }
 
     .btn-primary, .btn-secondary {
@@ -698,6 +806,7 @@
 
     .stack-grid { gap: 8px; width: 100%; }
     .stack-item { font-size: 10px; padding: 10px 12px; box-sizing: border-box; }
+    .stack-tooltip { display: none !important; }
 
     .about-grid { grid-template-columns: 1fr; gap: 32px; width: 100%; }
 
@@ -735,7 +844,7 @@
   }
 
   @media (max-width: 380px) {
-    .hero-title { font-size: 24px; }
+    .hero-title { font-size: 22px; }
     .stat-num { font-size: 18px; }
   }
 </style>
@@ -745,7 +854,7 @@
 <!-- NAV -->
 <nav>
   <div class="nav-logo">AR / AI</div>
-  <a href="https://t.me/aleksandrrizaev" class="nav-cta">Написать →</a>
+  <a href="#" class="nav-cta" onclick="openModal(); return false;">Бесплатный аудит →</a>
 </nav>
 
 <!-- HERO -->
@@ -753,130 +862,131 @@
   <div class="hero-left">
     <span class="hero-tag">AI-агентство · Автоматизация бизнеса</span>
     <h1 class="hero-title">
-      Автоматизирую<br>
-      <span class="accent">рутину</span><br>
-      <span class="line2">малого бизнеса</span>
+      Система не ждёт, пока освободишься.<br>
+      <span class="accent">Занимайся бизнесом.</span><br>
+      <span class="line2">Рутина — не твоя работа.</span>
     </h1>
-    <p class="hero-sub">
-      Строю рабочие автоматизации на n8n с AI — Telegram-боты, интеграции сервисов, обработка данных. То, что занимает у тебя часы — работает само.
-    </p>
     <div class="hero-actions">
-      <a href="https://t.me/aleksandrrizaev" class="btn-primary">
-        Обсудить задачу →
+      <a href="#" class="btn-primary" onclick="openModal(); return false;">
+        Получить бесплатный аудит →
       </a>
       <button class="btn-secondary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;border:1px solid var(--border);background:transparent;">
-        Что умею
+        Примеры задач
       </button>
     </div>
   </div>
 
-  <div class="hero-right">
-    <div class="hero-visual">
-      <div class="orbit orbit-1"><div class="orbit-dot"></div></div>
-      <div class="orbit orbit-2"><div class="orbit-dot orbit-dot-2"></div></div>
-      <div class="hero-nodes">
-        <div class="node-row">
-          <div class="node active">Webhook</div>
-          <div class="node-connector"></div>
-          <div class="node active">n8n</div>
-        </div>
-        <div class="node-row" style="padding-left:20px">
-          <div class="node-connector" style="width:1px;height:18px;background:var(--border);"></div>
-        </div>
-        <div class="node-row">
-          <div class="node">Telegram</div>
-          <div class="node-connector"></div>
-          <div class="node active2">OpenAI</div>
-          <div class="node-connector"></div>
-          <div class="node">Sheets</div>
-        </div>
-        <div class="node-row" style="padding-left:20px">
-          <div class="node-connector" style="width:1px;height:18px;background:var(--border);"></div>
-        </div>
-        <div class="node-row">
-          <div class="node active">Supabase</div>
-          <div class="node-connector"></div>
-          <div class="node active2">Claude</div>
-        </div>
-        <div class="node-row" style="padding-left:20px">
-          <div class="node-connector" style="width:1px;height:18px;background:var(--border);"></div>
-        </div>
-        <div class="node-row">
-          <div class="node" style="color:var(--accent);border-color:var(--accent);font-size:9px;">✓ Готово. Работает само.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- STATS -->
-<div class="stats">
-  <div class="stat">
-    <div class="stat-num">n8n</div>
-    <div class="stat-label">Основной инструмент</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">AI</div>
-    <div class="stat-label">OpenAI, LLM-интеграции</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">TG</div>
-    <div class="stat-label">Боты под любые задачи</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">24/7</div>
-    <div class="stat-label">Работает без тебя</div>
-  </div>
 </div>
 
 <!-- SERVICES -->
 <section id="services">
   <div class="section-header reveal">
-    <span class="section-tag">Что делаю</span>
-    <h2 class="section-title">Типы задач,<br>которые беру в работу</h2>
+    <h2 class="section-title">Наши решения</h2>
   </div>
 
   <div class="services-grid reveal">
     <div class="service-card">
       <span class="service-icon">🤖</span>
-      <div class="service-title">Telegram-боты для бизнеса</div>
-      <p class="service-desc">Приём заявок, ответы на вопросы, уведомления — всё через бота. Без пропущенных сообщений и человеческого фактора.</p>
+      <div class="service-title">Круглосуточный менеджер первой линии</div>
+      <p class="service-desc">Клиент пишет в Telegram — AI-агент отвечает сам, смотрит свободные слоты, предлагает время, заносит заявку в базу. Вам не нужен отдельный человек на приём обращений. Ни одна заявка не теряется. Менеджер занимается только теми, кто готов платить.</p>
     </div>
     <div class="service-card">
       <span class="service-icon">⚡</span>
-      <div class="service-title">Автоматизация процессов</div>
-      <p class="service-desc">Назначение задач, напоминания, отчёты, согласования. Цепочки действий, которые раньше делал человек — теперь делает система.</p>
+      <div class="service-title">Администратор без выходных</div>
+      <p class="service-desc">Назначение задач сотрудникам, напоминания, уведомления о статусах, формирование отчётов — всё происходит автоматически. То, что раньше занимало 2 часа в день у человека, теперь работает само.</p>
     </div>
     <div class="service-card">
       <span class="service-icon">🔗</span>
-      <div class="service-title">Интеграция сервисов</div>
-      <p class="service-desc">Связка CRM, таблиц, мессенджеров, форм и других систем между собой. Данные сами попадают куда нужно.</p>
+      <div class="service-title">Диспетчер данных — мгновенно и без ошибок</div>
+      <p class="service-desc">CRM, таблицы, мессенджеры, формы, 1С — всё работает вместе. Данные не теряются при передаче, не вбиваются вручную дважды. Один раз настроили — система работает без участия человека.</p>
     </div>
     <div class="service-card">
       <span class="service-icon">🧠</span>
-      <div class="service-title">AI-обработка данных</div>
-      <p class="service-desc">Анализ текстов, классификация заявок, генерация ответов — с подключением языковых моделей в твой рабочий поток.</p>
+      <div class="service-title">Аналитик отдела продаж — анализирует все звонки, не выборочно</div>
+      <p class="service-desc">AI слушает и анализирует звонки, классифицирует заявки по приоритету, генерирует ответы на типовые запросы. Вы видите, где теряются клиенты, и получаете конкретные точки роста.</p>
     </div>
   </div>
 </section>
 
-<!-- STACK -->
-<section>
-  <div class="section-header reveal">
-    <span class="section-tag">Стек</span>
-    <h2 class="section-title">С чем работаю</h2>
-  </div>
-  <div class="stack-grid reveal">
-    <div class="stack-item">n8n</div>
-    <div class="stack-item">OpenAI</div>
-    <div class="stack-item">Telegram Bot API</div>
-    <div class="stack-item">Supabase</div>
-    <div class="stack-item">Google Sheets</div>
-    <div class="stack-item">Webhook / REST API</div>
-    <div class="stack-item">Airtable</div>
-    <div class="stack-item">Notion</div>
-    <div class="stack-item">ElevenLabs</div>
-    <div class="stack-item">Claude (Anthropic)</div>
+<!-- STACK MARQUEE -->
+<section style="padding-top:0;padding-bottom:0;">
+  <div class="marquee-wrapper">
+        <div class="marquee-track">
+      <div class="marquee-item">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/n8n.svg" alt="n8n" width="22" height="22" style="filter: brightness(0) saturate(100%) invert(1); opacity:0.6;" class="marquee-icon" data-color="#c8f542">
+        <span>n8n</span>
+      </div>
+      <div class="marquee-item">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openai.svg" alt="OpenAI" width="22" height="22" style="filter: brightness(0) saturate(100%) invert(1); opacity:0.6;" class="marquee-icon" data-color="#ffffff">
+        <span>OpenAI</span>
+      </div>
+      <div class="marquee-item">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/telegram.svg" alt="Telegram" width="22" height="22" style="filter: brightness(0) saturate(100%) invert(1); opacity:0.6;" class="marquee-icon" data-color="#2AABEE">
+        <span>Telegram</span>
+      </div>
+      <div class="marquee-item">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/supabase.svg" alt="Supabase" width="22" height="22" style="filter: brightness(0) saturate(100%) invert(1); opacity:0.6;" class="marquee-icon" data-color="#3ECF8E">
+        <span>Supabase</span>
+      </div>
+      <div class="marquee-item">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/googlesheets.svg" alt="Google Sheets" width="22" height="22" style="filter: brightness(0) saturate(100%) invert(1); opacity:0.6;" class="marquee-icon" data-color="#34A853">
+        <span>Google Sheets</span>
+      </div>
+      <div class="marquee-item">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/airtable.svg" alt="Airtable" width="22" height="22" style="filter: brightness(0) saturate(100%) invert(1); opacity:0.6;" class="marquee-icon" data-color="#FCB400">
+        <span>Airtable</span>
+      </div>
+      <div class="marquee-item">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/notion.svg" alt="Notion" width="22" height="22" style="filter: brightness(0) saturate(100%) invert(1); opacity:0.6;" class="marquee-icon" data-color="#ffffff">
+        <span>Notion</span>
+      </div>
+      <div class="marquee-item">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/anthropic.svg" alt="Claude" width="22" height="22" style="filter: brightness(0) saturate(100%) invert(1); opacity:0.6;" class="marquee-icon" data-color="#D4A27F">
+        <span>Claude</span>
+      </div>
+      <div class="marquee-item">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/elevenlabs.svg" alt="ElevenLabs" width="22" height="22" style="filter: brightness(0) saturate(100%) invert(1); opacity:0.6;" class="marquee-icon" data-color="#ffffff">
+        <span>ElevenLabs</span>
+      </div>
+      <div class="marquee-item">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/n8n.svg" alt="n8n" width="22" height="22" style="filter: brightness(0) saturate(100%) invert(1); opacity:0.6;" class="marquee-icon" data-color="#c8f542">
+        <span>n8n</span>
+      </div>
+      <div class="marquee-item">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openai.svg" alt="OpenAI" width="22" height="22" style="filter: brightness(0) saturate(100%) invert(1); opacity:0.6;" class="marquee-icon" data-color="#ffffff">
+        <span>OpenAI</span>
+      </div>
+      <div class="marquee-item">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/telegram.svg" alt="Telegram" width="22" height="22" style="filter: brightness(0) saturate(100%) invert(1); opacity:0.6;" class="marquee-icon" data-color="#2AABEE">
+        <span>Telegram</span>
+      </div>
+      <div class="marquee-item">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/supabase.svg" alt="Supabase" width="22" height="22" style="filter: brightness(0) saturate(100%) invert(1); opacity:0.6;" class="marquee-icon" data-color="#3ECF8E">
+        <span>Supabase</span>
+      </div>
+      <div class="marquee-item">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/googlesheets.svg" alt="Google Sheets" width="22" height="22" style="filter: brightness(0) saturate(100%) invert(1); opacity:0.6;" class="marquee-icon" data-color="#34A853">
+        <span>Google Sheets</span>
+      </div>
+      <div class="marquee-item">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/airtable.svg" alt="Airtable" width="22" height="22" style="filter: brightness(0) saturate(100%) invert(1); opacity:0.6;" class="marquee-icon" data-color="#FCB400">
+        <span>Airtable</span>
+      </div>
+      <div class="marquee-item">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/notion.svg" alt="Notion" width="22" height="22" style="filter: brightness(0) saturate(100%) invert(1); opacity:0.6;" class="marquee-icon" data-color="#ffffff">
+        <span>Notion</span>
+      </div>
+      <div class="marquee-item">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/anthropic.svg" alt="Claude" width="22" height="22" style="filter: brightness(0) saturate(100%) invert(1); opacity:0.6;" class="marquee-icon" data-color="#D4A27F">
+        <span>Claude</span>
+      </div>
+      <div class="marquee-item">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/elevenlabs.svg" alt="ElevenLabs" width="22" height="22" style="filter: brightness(0) saturate(100%) invert(1); opacity:0.6;" class="marquee-icon" data-color="#ffffff">
+        <span>ElevenLabs</span>
+      </div>
+    </div>
+    </div>
   </div>
 </section>
 
@@ -891,37 +1001,37 @@
     <div class="about-text">
       <p>Меня зовут <strong>Александр Ризаев</strong>. Занимаюсь автоматизацией бизнес-процессов с использованием AI и no-code инструментов.</p>
       <p>Помогаю малому бизнесу освободить время от повторяющихся операций — то, что можно передать системе, не должен делать человек.</p>
-      <p>Технический бэкграунд: <strong>высшее техническое образование</strong>, практическое обучение у экспертов в области AI-автоматизации.</p>
+      <p>Прошёл специализированное обучение AI-автоматизации у практикующих экспертов рынка. Знаю не только как это работает — знаю как это внедрить в реальный бизнес.</p>
       <p>Работаю честно: если задача не в моей зоне компетенции — скажу об этом прямо.</p>
     </div>
 
     <div class="about-facts">
       <div class="fact-row">
-        <div class="fact-icon">🎓</div>
+        <div class="fact-icon">🔍</div>
         <div>
-          <div class="fact-title">Образование</div>
-          <div class="fact-desc">Высшее техническое + практическое обучение AI-автоматизации.</div>
+          <div class="fact-title">1. Аудит</div>
+          <div class="fact-desc">Разбираемся в ваших процессах. Находим, где теряется время и деньги.</div>
+        </div>
+      </div>
+      <div class="fact-row">
+        <div class="fact-icon">📐</div>
+        <div>
+          <div class="fact-title">2. Решение</div>
+          <div class="fact-desc">Готовлю конкретное техническое решение под вашу задачу — не шаблон.</div>
         </div>
       </div>
       <div class="fact-row">
         <div class="fact-icon">⚙️</div>
         <div>
-          <div class="fact-title">Подход</div>
-          <div class="fact-desc">Сначала разбираюсь в задаче, потом строю решение. Не шаблоны — а то, что работает у тебя.</div>
+          <div class="fact-title">3. Разработка и интеграция</div>
+          <div class="fact-desc">Строю систему, подключаю к вашим сервисам, тестирую на реальных данных.</div>
         </div>
       </div>
       <div class="fact-row">
         <div class="fact-icon">🎯</div>
         <div>
-          <div class="fact-title">Фокус</div>
-          <div class="fact-desc">Малый бизнес: технический сервис, услуги, розница, онлайн-проекты.</div>
-        </div>
-      </div>
-      <div class="fact-row">
-        <div class="fact-icon">💬</div>
-        <div>
-          <div class="fact-title">Связь</div>
-          <div class="fact-desc">Работаю через Telegram. Быстро отвечаю, не пропадаю.</div>
+          <div class="fact-title">4. Адаптация</div>
+          <div class="fact-desc">Обучаю команду, дорабатываю по итогам первых недель работы системы.</div>
         </div>
       </div>
     </div>
@@ -930,18 +1040,119 @@
 
 <!-- CTA -->
 <div class="cta-section" style="padding-left:40px;padding-right:40px;">
-  <h2 class="cta-title reveal">Есть задача?<br>Давай разберём её.</h2>
-  <p class="cta-sub reveal">Напиши в Telegram — расскажи что делаешь руками и сколько времени это занимает. Посмотрим, что можно автоматизировать.</p>
-  <a href="https://t.me/aleksandrrizaev" class="btn-primary reveal" style="display:inline-flex;">
-    Написать в Telegram →
+  <h2 class="cta-title reveal">Разберём ваш бизнес<br>на возможности AI.</h2>
+  <p class="cta-sub reveal">Бесплатная встреча 40–60 минут. Вы рассказываете, что делаете руками. Я показываю, что из этого можно передать системе и сколько времени это освободит.</p>
+  <a href="#" class="btn-primary reveal" style="display:inline-flex;" onclick="openModal(); return false;">
+    Записаться на бесплатный аудит →
   </a>
 </div>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-left">© 2025 Александр Ризаев</div>
+  <div class="footer-left">© 2026 Александр Ризаев</div>
   <div class="footer-right">AI-автоматизация для малого бизнеса</div>
 </footer>
+
+<!-- MODAL FORM -->
+<div id="auditModal" style="
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  background:rgba(0,0,0,0.85);
+  backdrop-filter:blur(8px);
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  box-sizing:border-box;
+">
+  <div style="
+    background:#111;
+    border:1px solid #2a2a2a;
+    max-width:480px;
+    width:100%;
+    padding:48px 40px;
+    position:relative;
+    box-sizing:border-box;
+  ">
+    <button onclick="closeModal()" style="
+      position:absolute;
+      top:16px;right:20px;
+      background:none;border:none;
+      color:#666;font-size:22px;
+      cursor:pointer;line-height:1;
+    ">×</button>
+
+    <div style="
+      font-family:'Unbounded',sans-serif;
+      font-size:10px;
+      letter-spacing:0.2em;
+      text-transform:uppercase;
+      color:var(--accent);
+      margin-bottom:16px;
+    ">Бесплатный аудит</div>
+
+    <div id="formFields">
+      <div style="
+        font-family:'Unbounded',sans-serif;
+        font-size:20px;
+        font-weight:700;
+        line-height:1.2;
+        margin-bottom:10px;
+      ">Расскажите о своём бизнесе</div>
+
+      <p style="font-size:13px;color:#666;margin-bottom:32px;line-height:1.6;">
+        Заполните форму — я свяжусь в течение нескольких часов и мы договоримся об удобном времени для встречи.
+      </p>
+      <div style="margin-bottom:16px;">
+        <label style="font-family:'Unbounded',sans-serif;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:#666;display:block;margin-bottom:8px;">Имя *</label>
+        <input id="f_name" type="text" placeholder="Александр" style="
+          width:100%;background:#0a0a0a;border:1px solid #2a2a2a;
+          color:#f0f0f0;padding:12px 16px;font-size:14px;font-family:'Mulish',sans-serif;
+          box-sizing:border-box;outline:none;transition:border-color 0.2s;
+        " onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='#2a2a2a'">
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-family:'Unbounded',sans-serif;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:#666;display:block;margin-bottom:8px;">Telegram или телефон *</label>
+        <input id="f_contact" type="text" placeholder="@username или +7..." style="
+          width:100%;background:#0a0a0a;border:1px solid #2a2a2a;
+          color:#f0f0f0;padding:12px 16px;font-size:14px;font-family:'Mulish',sans-serif;
+          box-sizing:border-box;outline:none;transition:border-color 0.2s;
+        " onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='#2a2a2a'">
+      </div>
+
+      <div style="margin-bottom:28px;">
+        <label style="font-family:'Unbounded',sans-serif;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:#666;display:block;margin-bottom:8px;">Чем занимаетесь? *</label>
+        <input id="f_business" type="text" placeholder="Например: автосервис, кафе, интернет-магазин" style="
+          width:100%;background:#0a0a0a;border:1px solid #2a2a2a;
+          color:#f0f0f0;padding:12px 16px;font-size:14px;font-family:'Mulish',sans-serif;
+          box-sizing:border-box;outline:none;transition:border-color 0.2s;
+        " onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='#2a2a2a'">
+      </div>
+
+      <div id="formError" style="color:#ff5555;font-size:12px;margin-bottom:12px;display:none;">Пожалуйста, заполните обязательные поля</div>
+
+      <button onclick="submitForm()" style="
+        width:100%;
+        font-family:'Unbounded',sans-serif;
+        font-size:12px;font-weight:700;
+        letter-spacing:0.1em;text-transform:uppercase;
+        color:#0a0a0a;background:var(--accent);
+        border:none;padding:16px;cursor:pointer;
+        transition:background 0.2s;
+      " onmouseover="this.style.background='var(--accent2)'" onmouseout="this.style.background='var(--accent)'">
+        Отправить заявку →
+      </button>
+    </div>
+
+    <div id="formSuccess" style="display:none;text-align:center;padding:20px 0;">
+      <div style="font-size:40px;margin-bottom:16px;">✓</div>
+      <div style="font-family:'Unbounded',sans-serif;font-size:16px;font-weight:700;margin-bottom:10px;color:var(--accent);">Заявка отправлена</div>
+      <p style="color:#666;font-size:14px;line-height:1.6;">Свяжусь в течение нескольких часов — обсудим ваш бизнес и найдём точки для автоматизации.</p>
+    </div>
+  </div>
+</div>
 
 <script>
   // Scroll reveal
@@ -954,6 +1165,51 @@
   }, { threshold: 0.1 });
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Modal
+  function openModal() {
+    const modal = document.getElementById('auditModal');
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    const modal = document.getElementById('auditModal');
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('auditModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // Form submit — sends to Telegram via your bot
+  async function submitForm() {
+    const name = document.getElementById('f_name').value.trim();
+    const contact = document.getElementById('f_contact').value.trim();
+    const business = document.getElementById('f_business').value.trim();
+
+    if (!name || !contact || !business) {
+      document.getElementById('formError').style.display = 'block';
+      return;
+    }
+    document.getElementById('formError').style.display = 'none';
+
+    try {
+      await fetch('https://n8nn8nn8n.tw1.ru/webhook/audit-form', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, contact, business })
+      });
+    } catch(e) {}
+
+    document.getElementById('formFields').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
 </script>
 </body>
 </html>
