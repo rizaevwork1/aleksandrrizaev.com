@@ -93,7 +93,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 90px 40px 40px;
+    padding: 90px 40px 60px;
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
@@ -720,19 +720,20 @@
 
     .hero {
       grid-template-columns: 1fr;
-      padding: 80px 24px 32px;
+      padding: 90px 24px 60px;
       gap: 0;
-      min-height: auto;
+      min-height: 100vh;
       width: 100%;
       text-align: center;
       align-items: center;
+      justify-content: center;
     }
 
     .hero-right { display: none; }
 
     .hero-tag {
       font-size: 9px;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -740,21 +741,24 @@
     }
 
     .hero-title {
-      font-size: 26px;
+      font-size: 28px;
       word-break: break-word;
       overflow-wrap: break-word;
-      margin-bottom: 12px;
+      margin-bottom: 24px;
+      max-width: 100%;
     }
 
+    .hero-title .line2 { font-size: 0.65em; }
+
     .hero-sub {
-      font-size: 14px;
-      margin-bottom: 28px;
+      font-size: 15px;
+      margin-bottom: 32px;
       max-width: 100%;
     }
 
     .hero-actions {
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
       width: 100%;
       align-items: center;
     }
@@ -762,61 +766,36 @@
     .btn-primary, .btn-secondary {
       width: 100%;
       justify-content: center;
-      padding: 14px 20px;
+      padding: 16px 20px;
       box-sizing: border-box;
+      font-size: 11px;
     }
 
-    .stats {
-      padding: 24px 20px;
-      flex-wrap: wrap;
-      gap: 0;
-      border-left: none;
-      border-right: none;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    .stat {
-      padding: 16px 12px;
-      border-right: none;
-      border-bottom: 1px solid var(--border);
-      flex: none;
-      width: 50%;
-      box-sizing: border-box;
-    }
-
-    .stat:nth-child(odd) { padding-right: 12px; }
-    .stat:nth-child(even) { padding-left: 12px; border-left: 1px solid var(--border); }
-    .stat:nth-last-child(-n+2) { border-bottom: none; }
-
-    .stat-num { font-size: 22px; }
-    .stat-label { font-size: 11px; }
+    .marquee-wrapper { padding: 16px 0; }
+    .marquee-item { font-size: 10px; gap: 8px; }
 
     section {
-      padding: 48px 24px;
+      padding: 56px 24px;
       width: 100%;
       box-sizing: border-box;
     }
 
-    .section-title { font-size: 22px; }
+    .section-header { margin-bottom: 32px; }
+    .section-title { font-size: 24px; line-height: 1.15; }
 
     .services-grid { grid-template-columns: 1fr; width: 100%; }
-
     .service-card { padding: 28px 24px; }
-
-    .stack-grid { gap: 8px; width: 100%; }
-    .stack-item { font-size: 10px; padding: 10px 12px; box-sizing: border-box; }
-    .stack-tooltip { display: none !important; }
+    .service-title { font-size: 14px; }
+    .service-desc { font-size: 13px; }
 
     .about-grid { grid-template-columns: 1fr; gap: 32px; width: 100%; }
-
-    .about-text p { font-size: 14px; }
-
+    .about-text p { font-size: 14px; line-height: 1.7; }
     .fact-row { padding: 16px 20px; box-sizing: border-box; }
+    .fact-title { font-size: 10px; }
     .fact-desc { font-size: 12px; }
 
     .cta-section {
-      padding: 48px 24px !important;
+      padding: 56px 24px !important;
       margin: 0 0 60px !important;
       width: 100% !important;
       box-sizing: border-box !important;
@@ -824,8 +803,8 @@
       border-right: none !important;
     }
 
-    .cta-title { font-size: 26px; }
-    .cta-sub { font-size: 14px; }
+    .cta-title { font-size: 24px; margin-bottom: 16px; }
+    .cta-sub { font-size: 14px; margin-bottom: 32px; }
 
     .btn-primary.reveal {
       width: 100%;
@@ -844,8 +823,8 @@
   }
 
   @media (max-width: 380px) {
-    .hero-title { font-size: 22px; }
-    .stat-num { font-size: 18px; }
+    .hero-title { font-size: 24px; }
+    .section-title { font-size: 20px; }
   }
 </style>
 </head>
